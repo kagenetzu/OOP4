@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Module;
 
 public class Administration extends Workers {
     protected int subordinates;
@@ -9,7 +9,7 @@ public class Administration extends Workers {
     }
 
     @Override
-    public void show() {
+    public String show() {
         StringBuilder stringBuilder = new StringBuilder("");
         stringBuilder.append("Номер в базе данных: "+this.id + "\n");
         stringBuilder.append("Имя: " + getName() + "\n");
@@ -17,7 +17,7 @@ public class Administration extends Workers {
         stringBuilder.append("Кол-во часов работы: " + getWorkingHourse() + "\n");
         stringBuilder.append("Задача: " + getFunction() + "\n");
         stringBuilder.append("Кол-во подчиненных в управлении: "+ getSubordinates() + "\n");
-        System.out.println(stringBuilder.toString());
+        return (stringBuilder.toString());
     }
 
     public int getSubordinates() {

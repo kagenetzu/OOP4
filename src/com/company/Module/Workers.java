@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Module;
 
 public abstract class Workers {
     private static int count = 0;
@@ -37,5 +37,5 @@ public abstract class Workers {
         return function;
     }
 
-    public abstract void show();
+    public abstract String show();
 }

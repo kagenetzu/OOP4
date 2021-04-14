@@ -1,4 +1,9 @@
-package com.company;
+package com.company.View;
+
+import com.company.Module.Administration;
+import com.company.Module.Database;
+import com.company.Module.Engineer;
+import com.company.Module.JustWorker;
 
 import java.util.Scanner;
 

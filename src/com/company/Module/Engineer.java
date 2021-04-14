@@ -1,23 +1,25 @@
-package com.company;
+package com.company.Module;
 
-public class JustWorker extends Workers {
+public class Engineer extends Workers {
+    protected String rank;
 
-    public  JustWorker(String name, int salary, int workingHouse, String function){
-        super(name,salary,workingHouse,function);
-
+    public  Engineer(String name, int salary, int workingHourse, String function, String rank){
+        super(name,salary,workingHourse,function);
+        this.rank = rank;
     }
-
     @Override
-    public void show() {
+    public String show() {
         StringBuilder stringBuilder = new StringBuilder("");
         stringBuilder.append("Номер в базе данных: "+this.id + "\n");
         stringBuilder.append("Имя: " + getName() + "\n");
         stringBuilder.append("Заработная плата: " + getSalary() + "\n");
         stringBuilder.append("Кол-во часов работы: " + getWorkingHourse() + "\n");
         stringBuilder.append("Задача: " + getFunction() + "\n");
-        System.out.println(stringBuilder.toString());
+        stringBuilder.append("Разряд: "+ getRank()+ "\n");
+        return (stringBuilder.toString());
     }
 
-
-
+    public String getRank() {
+        return rank;
+    }
 }
