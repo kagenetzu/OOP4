@@ -3,10 +3,7 @@ package com.company.Controller;
 import com.company.Module.Administration;
 import com.company.Module.Engineer;
 import com.company.Module.JustWorker;
-import com.company.Module.Workers;
-import com.company.View.GMenu;
 import java.sql.*;
-import java.util.ArrayList;
 
 public class BDWorkers {
     public static Connection connection; //Для соединения с БД необходимо использовать класс Connection пакета java.sql.
@@ -38,8 +35,6 @@ public class BDWorkers {
     }
     public static void writeDBWORKER(String name, int salary, int workingHours) throws SQLException{
 
-        //req.execute("INSERT INTO 'stud' ('name','surname','gender') VALUES ('Ivan', 'Sinicin', 'm'); ");
-        //req.execute("INSERT INTO 'stud' ('name','surname','gender') VALUES ('Vladimir', 'Sergeev','m'); ");
         PreparedStatement a = connection.prepareStatement("INSERT INTO 'workers' ('name','salary','workingHours','function','rank','subordinates') VALUES (?,?,?,?,?,?); ");
         a.setObject(1,name);
         a.setObject(2,salary);
@@ -47,13 +42,15 @@ public class BDWorkers {
         a.setObject(4,"Рабочий");
         a.setObject(5,"-");
         a.setObject(6,"-");
+
         a.execute();
+        result = statement.executeQuery("SELECT * FROM workers ORDER BY id DESC LIMIT 1");
+        Functional.data.add(new JustWorker(result.getInt("id") ,result.getString("name"), result.getInt("salary"), result.getInt("workingHours"), result.getString("function")));
+
 
     }
     public static void writeDBENGINEER(String name, int salary, int workingHours,String rank) throws SQLException{
 
-        //req.execute("INSERT INTO 'stud' ('name','surname','gender') VALUES ('Ivan', 'Sinicin', 'm'); ");
-        //req.execute("INSERT INTO 'stud' ('name','surname','gender') VALUES ('Vladimir', 'Sergeev','m'); ");
         PreparedStatement a = connection.prepareStatement("INSERT INTO 'workers' ('name','salary','workingHours','function','rank','subordinates') VALUES (?,?,?,?,?,?); ");
         a.setObject(1,name);
         a.setObject(2,salary);
@@ -62,12 +59,14 @@ public class BDWorkers {
         a.setObject(5,rank);
         a.setObject(6,"-");
         a.execute();
+        result = statement.executeQuery("SELECT * FROM workers ORDER BY id DESC LIMIT 1");
+        Functional.data.add( new Engineer(result.getInt("id"),result.getString("name"), result.getInt("salary"), result.getInt("workingHours"), result.getString("function"),result.getString("rank")));
+
+
 
     }
     public static void writeDBADMIN(String name, int salary, int workingHours,int subordinates) throws SQLException{
 
-        //req.execute("INSERT INTO 'stud' ('name','surname','gender') VALUES ('Ivan', 'Sinicin', 'm'); ");
-        //req.execute("INSERT INTO 'stud' ('name','surname','gender') VALUES ('Vladimir', 'Sergeev','m'); ");
         PreparedStatement a = connection.prepareStatement("INSERT INTO 'workers' ('name','salary','workingHours','function','rank','subordinates') VALUES (?,?,?,?,?,?); ");
         a.setObject(1,name);
         a.setObject(2,salary);
@@ -76,6 +75,8 @@ public class BDWorkers {
         a.setObject(5,"-");
         a.setObject(6,subordinates);
         a.execute();
+        result = statement.executeQuery("SELECT * FROM workers ORDER BY id DESC LIMIT 1");
+        Functional.data.add(new Administration(result.getInt("id"),result.getString("name"), result.getInt("salary"), result.getInt("workingHours"), result.getString("function"),result.getInt("subordinates")));
 
     }
 
@@ -87,15 +88,15 @@ public class BDWorkers {
         while(result.next())
         {
             if(result.getString("function").equals("Рабочий")) {
-                JustWorker student = new JustWorker(result.getString("name"), result.getInt("salary"), result.getInt("workingHours"), result.getString("function"));
-                Functional.data.add(student);
+                JustWorker worker = new JustWorker(result.getInt("id") ,result.getString("name"), result.getInt("salary"), result.getInt("workingHours"), result.getString("function"));
+                Functional.data.add(worker);
             }
             else if (result.getString("function").equals("Инженер")){
-                Engineer engineer = new Engineer(result.getString("name"), result.getInt("salary"), result.getInt("workingHours"), result.getString("function"),result.getString("rank"));
+                Engineer engineer = new Engineer(result.getInt("id"),result.getString("name"), result.getInt("salary"), result.getInt("workingHours"), result.getString("function"),result.getString("rank"));
                 Functional.data.add(engineer);
             }
             else {
-                Administration admin = new Administration(result.getString("name"), result.getInt("salary"), result.getInt("workingHours"), result.getString("function"),result.getInt("subordinates"));
+                Administration admin = new Administration(result.getInt("id"),result.getString("name"), result.getInt("salary"), result.getInt("workingHours"), result.getString("function"),result.getInt("subordinates"));
                 Functional.data.add(admin);
             }
         }
@@ -103,13 +104,8 @@ public class BDWorkers {
         System.out.println("Таблица выгружена");
     }
     public static void deleteWorkers(int number) throws SQLException {
-/* CREATE PROCEDURE [dbo].[deleteHospital]
-@hospitalNumber integer
-AS
-IF EXISTS (Select * FROM Hospital  WHERE Hospital.hospitalNumber = @hospitalNumber )
-delete from Hospital where hospitalNumber = @hospitalNumber
-return 0 */
-        PreparedStatement a = connection.prepareStatement("DELETE FROM 'workers' WHERE 'id' = ?");
+
+        PreparedStatement a = connection.prepareStatement("DELETE FROM workers WHERE id = ?");
         a.setObject(1,number);
         a.execute();
 

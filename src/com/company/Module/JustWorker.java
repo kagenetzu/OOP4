@@ -2,8 +2,8 @@ package com.company.Module;
 
 public class JustWorker extends Workers {
 
-    public  JustWorker(String name, int salary, int workingHouse, String function){
-        super(name,salary,workingHouse,function);
+    public  JustWorker(int id,String name, int salary, int workingHouse, String function){
+        super(id,name,salary,workingHouse,function);
 
     }
 

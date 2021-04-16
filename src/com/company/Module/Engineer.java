@@ -3,8 +3,8 @@ package com.company.Module;
 public class Engineer extends Workers {
     protected String rank;
 
-    public  Engineer(String name, int salary, int workingHourse, String function, String rank){
-        super(name,salary,workingHourse,function);
+    public  Engineer(int id,String name, int salary, int workingHourse, String function, String rank){
+        super(id,name,salary,workingHourse,function);
         this.rank = rank;
     }
     @Override

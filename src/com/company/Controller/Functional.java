@@ -72,11 +72,12 @@ class JustWorkerAdd extends JFrame {
 
     public static void add() {
         try {
-            Functional.data.add(new JustWorker(
-                    JustWorkerAdd.getTNameJustWorker().getText(),
-                    Integer.parseInt(JustWorkerAdd.getTSalary().getText()),
-                    Integer.parseInt(JustWorkerAdd.getTWorkingHourse().getText()),
-                    "Рабочий"));
+//            Functional.data.add(new JustWorker(
+//                    JustWorkerAdd.getTNameJustWorker().getText(),
+//                    Integer.parseInt(JustWorkerAdd.getTSalary().getText()),
+//                    Integer.parseInt(JustWorkerAdd.getTWorkingHourse().getText()),
+//                    "Рабочий"));
+
             try {
                 BDWorkers.writeDBWORKER(JustWorkerAdd.getTNameJustWorker().getText(),
                         Integer.parseInt(JustWorkerAdd.getTSalary().getText()),
@@ -214,7 +215,7 @@ class menuSearch extends JFrame {
 
         try {
             id = Integer.parseInt(menuSearch.getTid().getText());
-           // Functional.data.delete(id);
+            Functional.data.delete(id);
             BDWorkers.deleteWorkers(id);
             result = "Сотрудник удален.";
         } catch (NumberFormatException ex) {
@@ -273,11 +274,11 @@ class EngineerAdd extends JFrame {
 
     public static void add() {
         try {
-            Functional.data.add(new Engineer(
-                    EngineerAdd.getTNameEngineer().getText(),
-                    Integer.parseInt(EngineerAdd.getTSalary().getText()),
-                    Integer.parseInt(EngineerAdd.getTWorkingHourse().getText()),
-                    "Инженер", EngineerAdd.getTRank().getText()));
+//            Functional.data.add(new Engineer(
+//                    EngineerAdd.getTNameEngineer().getText(),
+//                    Integer.parseInt(EngineerAdd.getTSalary().getText()),
+//                    Integer.parseInt(EngineerAdd.getTWorkingHourse().getText()),
+//                    "Инженер", EngineerAdd.getTRank().getText()));
             try {
                 BDWorkers.writeDBENGINEER(EngineerAdd.getTNameEngineer().getText(),
                         Integer.parseInt(EngineerAdd.getTSalary().getText()),
@@ -354,11 +355,11 @@ class AdministrationAdd extends JFrame {
 
     public static void add() {
         try {
-            Functional.data.add(new Administration(
-                    AdministrationAdd.getTNameAdministration().getText(),
-                    Integer.parseInt(AdministrationAdd.getTSalary().getText()),
-                    Integer.parseInt(AdministrationAdd.getTWorkingHourse().getText()),
-                    "Управляющий", Integer.parseInt(AdministrationAdd.getTSubordinates().getText())));
+//            Functional.data.add(new Administration(
+//                    AdministrationAdd.getTNameAdministration().getText(),
+//                    Integer.parseInt(AdministrationAdd.getTSalary().getText()),
+//                    Integer.parseInt(AdministrationAdd.getTWorkingHourse().getText()),
+//                    "Управляющий", Integer.parseInt(AdministrationAdd.getTSubordinates().getText())));
             try {
                 BDWorkers.writeDBADMIN(AdministrationAdd.getTNameAdministration().getText(),
                         Integer.parseInt(AdministrationAdd.getTSalary().getText()),

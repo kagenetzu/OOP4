@@ -3,7 +3,7 @@ package com.company.Module;
 import java.util.ArrayList;
 
 public class Database {
-    private ArrayList<Workers> info = new ArrayList();
+    public ArrayList<Workers> info = new ArrayList();
     public void add(Workers worker){
         this.info.add(worker);
     }

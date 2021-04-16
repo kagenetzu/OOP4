@@ -3,8 +3,8 @@ package com.company.Module;
 public class Administration extends Workers {
     protected int subordinates;
 
-    public  Administration(String name, int salary, int workingHourse, String function, int subordinates){
-        super(name,salary,workingHourse,function);
+    public  Administration(int id,String name, int salary, int workingHourse, String function, int subordinates){
+        super(id,name,salary,workingHourse,function);
         this.subordinates = subordinates;
     }
 

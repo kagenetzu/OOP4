@@ -148,11 +148,11 @@ public class GMenu extends JFrame {
     }
     public static void addJW() {
         try {
-            Functional.data.add(new JustWorker(
-                    TNameJW.getText(),
-                    Integer.parseInt(TSalary.getText()),
-                    Integer.parseInt(TWorkingH.getText()),
-                    "Рабочий"));
+//            Functional.data.add(new JustWorker(
+//                    TNameJW.getText(),
+//                    Integer.parseInt(TSalary.getText()),
+//                    Integer.parseInt(TWorkingH.getText()),
+//                    "Рабочий"));
             BDWorkers.writeDBWORKER(TNameJW.getText(),
                     Integer.parseInt(TSalary.getText()),
                     Integer.parseInt(TWorkingH.getText()));
@@ -168,11 +168,11 @@ public class GMenu extends JFrame {
     }
     public static void addE() {
         try {
-            Functional.data.add(new Engineer(
-                    TNameEngineer.getText(),
-                    Integer.parseInt(TSalaryE.getText()),
-                    Integer.parseInt(TWorkingHourseE.getText()),
-                    "Инженер",TRank.getText()));
+//            Functional.data.add(new Engineer(
+//                    TNameEngineer.getText(),
+//                    Integer.parseInt(TSalaryE.getText()),
+//                    Integer.parseInt(TWorkingHourseE.getText()),
+//                    "Инженер",TRank.getText()));
             BDWorkers.writeDBENGINEER(TNameEngineer.getText(),
                     Integer.parseInt(TSalaryE.getText()),
                     Integer.parseInt(TWorkingHourseE.getText()), TRank.getText());
@@ -191,11 +191,11 @@ public class GMenu extends JFrame {
     }
     public static void addA() {
         try {
-            Functional.data.add(new Administration(
-                    TNameAdministration.getText(),
-                    Integer.parseInt(TSalaryA.getText()),
-                    Integer.parseInt(TWorkingHourseA.getText()),
-                    "Управляющий",Integer.parseInt(TSubordinates.getText())));
+//            Functional.data.add(new Administration(
+//                    TNameAdministration.getText(),
+//                    Integer.parseInt(TSalaryA.getText()),
+//                    Integer.parseInt(TWorkingHourseA.getText()),
+//                    "Управляющий",Integer.parseInt(TSubordinates.getText())));
 
                 BDWorkers.writeDBADMIN(TNameAdministration.getText(),
                         Integer.parseInt(TSalaryA.getText()),
