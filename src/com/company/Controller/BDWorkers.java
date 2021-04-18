@@ -79,6 +79,60 @@ public class BDWorkers {
         Functional.data.add(new Administration(result.getInt("id"),result.getString("name"), result.getInt("salary"), result.getInt("workingHours"), result.getString("function"),result.getInt("subordinates")));
 
     }
+    public static void sort(int i) throws SQLException {
+        if(i == 0) {
+            result = statement.executeQuery("SELECT * FROM workers ORDER BY salary ");
+        }else{
+            if (i == 1){
+                result = statement.executeQuery("SELECT * FROM workers ORDER BY workingHours ");
+            }else{
+                result = statement.executeQuery("SELECT * FROM workers ORDER BY subordinates ");
+            }
+        }
+
+
+        while(result.next())
+        {
+            if(result.getString("function").equals("Рабочий")) {
+                JustWorker worker = new JustWorker(result.getInt("id") ,result.getString("name"), result.getInt("salary"), result.getInt("workingHours"), result.getString("function"));
+                Functional.data.add(worker);
+            }
+            else if (result.getString("function").equals("Инженер")){
+                Engineer engineer = new Engineer(result.getInt("id"),result.getString("name"), result.getInt("salary"), result.getInt("workingHours"), result.getString("function"),result.getString("rank"));
+                Functional.data.add(engineer);
+            }
+            else {
+                Administration admin = new Administration(result.getInt("id"),result.getString("name"), result.getInt("salary"), result.getInt("workingHours"), result.getString("function"),result.getInt("subordinates"));
+                Functional.data.add(admin);
+            }
+        }
+    }
+    public static void filtr(String value) throws SQLException {
+
+        PreparedStatement a = connection.prepareStatement("SELECT * FROM workers WHERE name = ? OR  function = ? OR rank = ?");
+
+        a.setObject(1, value);
+        a.setObject(2,value);
+        a.setObject(3,value);
+
+        result = a.executeQuery();
+
+        while(result.next())
+        {
+            if(result.getString("function").equals("Рабочий")) {
+                JustWorker worker = new JustWorker(result.getInt("id") ,result.getString("name"), result.getInt("salary"), result.getInt("workingHours"), result.getString("function"));
+                Functional.data.add(worker);
+            }
+            else if (result.getString("function").equals("Инженер")){
+                Engineer engineer = new Engineer(result.getInt("id"),result.getString("name"), result.getInt("salary"), result.getInt("workingHours"), result.getString("function"),result.getString("rank"));
+                Functional.data.add(engineer);
+            }
+            else {
+                Administration admin = new Administration(result.getInt("id"),result.getString("name"), result.getInt("salary"), result.getInt("workingHours"), result.getString("function"),result.getInt("subordinates"));
+                Functional.data.add(admin);
+            }
+        }
+    }
 
     public static void readDBWORKER() throws ClassNotFoundException, SQLException
     {

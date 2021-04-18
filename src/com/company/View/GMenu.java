@@ -18,6 +18,12 @@ public class GMenu extends JFrame {
     public JButton addJustWorker;
     public JButton addEngineer;
     public JButton addAdministration;
+    public JButton butSort;
+    public JButton butFiltr;
+    public static JRadioButton hours;
+    public static JRadioButton salary;
+    public static JRadioButton subordinates;
+    private static JTextField valueFiltr;
     private static JTextField TNameJW;
     private static JTextField TSalary;
     private static JTextField TWorkingH;
@@ -29,11 +35,12 @@ public class GMenu extends JFrame {
     private static JTextField TSalaryA;
     private static JTextField TWorkingHourseA;
     private static JTextField TSubordinates;
+
     private Object[] columnusHeader = new String[]{"Номер", "Имя", "Зарплата", "Кол-во часов", "Должность", "Разряд", "Кол-во подчиненных"};
 
     public GMenu() {
         super("Сотрудники");
-        setSize(1750, 500);
+        setSize(1750, 550);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             @Override
@@ -63,6 +70,10 @@ public class GMenu extends JFrame {
         addJustWorker = new JButton("Добавление рабочего");
         addEngineer = new JButton("Добавление инженера");
         addAdministration = new JButton("Добавление управляющего");
+        butSort = new JButton("Сортировать");
+        butFiltr = new JButton("Найти");
+
+
         getContentPane().setLayout(null);
         JScrollPane scroll = new JScrollPane(jTable);
         scroll.setBounds(1, 1, 750, 400);
@@ -142,9 +153,71 @@ public class GMenu extends JFrame {
         admin.setBounds(1400,1,250,400);
         getContentPane().add(admin);
 
+        JPanel sort = new JPanel();
+        sort.setLayout(new GridLayout(11,1));
+        JLabel lablesort = new JLabel("Сортировка");
+        ButtonGroup group = new ButtonGroup();
+        hours = new JRadioButton("По кол-во часов", false);
+        salary = new JRadioButton("По заработной плате", true);
+        subordinates = new JRadioButton("По кол-ву подчиненных",false);
+        group.add(hours);
+        group.add(salary);
+        group.add(subordinates);
+        sort.add(lablesort);
+        sort.add(hours);
+        sort.add(salary);
+        sort.add(subordinates);
+        sort.add(butSort);
+        sort.setBounds(1,400,250,150);
+        getContentPane().add(sort);
+
+        JPanel filtr = new JPanel();
+        filtr.setLayout(new GridLayout(11,1));
+        JLabel labelfilt = new JLabel("Фильтрация");
+        valueFiltr = new JTextField();
+        filtr.add(labelfilt);
+        filtr.add(valueFiltr);
+        filtr.add(butFiltr);
+        filtr.setBounds(260,400,250,250);
+        getContentPane().add(filtr);
+
+        butFiltr.addActionListener(listener);
+        butSort.addActionListener(listener);
         addJustWorker.addActionListener(listener);
         addEngineer.addActionListener(listener);
         addAdministration.addActionListener(listener);
+    }
+    public static void sortBy(){
+        try {
+            if(hours.isSelected()){
+                BDWorkers.sort(1);
+            }else{
+                if(salary.isSelected()){
+                    BDWorkers.sort(0);
+                }else{
+                    if (subordinates.isSelected()){
+                        BDWorkers.sort(2);
+                    }
+                }
+            }
+        }catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+    public static void filtrBy(){
+        try {
+            if(valueFiltr.getText().equals("")){
+                Functional.data.info.clear();
+                BDWorkers.readDBWORKER();
+            }
+            else {
+                BDWorkers.filtr(valueFiltr.getText());
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
     public static void addJW() {
         try {
@@ -177,7 +250,7 @@ public class GMenu extends JFrame {
                     Integer.parseInt(TSalaryE.getText()),
                     Integer.parseInt(TWorkingHourseE.getText()), TRank.getText());
             //JOptionPane.showMessageDialog(null, "Инженер добавлен", "Добавление", JOptionPane.PLAIN_MESSAGE);
-            TNameJW.setText("");
+            TNameEngineer.setText("");
             TSalaryE.setText("");
             TWorkingHourseE.setText("");
             TRank.setText("");

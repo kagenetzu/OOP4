@@ -26,6 +26,7 @@ public class Functional extends JFrame {
             BDWorkers.connectionBDStud();
             BDWorkers.createTable();
             BDWorkers.readDBWORKER();
+
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException throwables) {

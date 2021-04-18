@@ -51,6 +51,16 @@ public class AddListener implements ActionListener {
             case "Добавление управляющего":
                 GMenu.addA();
                 break;
+            case "Сортировать":
+                Functional.data.info.clear();
+                GMenu.sortBy();
+                GMenu.jTable.setModel(new MyTable());
+                break;
+            case "Найти":
+                Functional.data.info.clear();
+                GMenu.filtrBy();
+                GMenu.jTable.setModel(new MyTable());
+                break;
         }
     }
 }
